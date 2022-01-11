@@ -9,18 +9,37 @@ class Solution
     public:
     vector<int> twoSum(vector<int>& nums, int target) {
         vector<int> rind;
-        int res;
+        int res = 0;     //allocate the value first will speed it up? 
         unordered_map<int, int> umapt;
-        for (int i = 0; i < (nums.size() - 1); i++) {
+        for (int i = 0; i < (nums.size()); i++) {
             res = target - nums[i];
             if (umapt.count(res) == 0) {
                 umapt[nums[i]] = i;
             }
             else
             {
-                rind.insert(rind.end(), { i,umapt.at(res) });
+                rind.insert(rind.end(), { i,umapt[res] });   //umapt[res] is faster than umapt.at(res).
             }
         }
+        return rind;
+        }
+        
+//use the unordered_map(hashtable) to speed up the code. The complexity is O(n).  
+//Runtime: 27 ms, faster than 43.82%  
+//Memory Usage: 12.1 MB, less than 11.96% 
+//The speed is fair but the memory is not that good.
+//        int res;
+//       unordered_map<int, int> umapt;
+//        for (int i = 0; i < (nums.size()); i++) {
+//            res = target - nums[i];
+//            if (umapt.count(res) == 0) {
+//                umapt[nums[i]] = i;
+//            }
+//            else
+//            {
+//                rind.insert(rind.end(), { i,umapt.at(res) });
+//            }
+//        }
  //This is the brute force method that has complexity O(n^2)    
  //       for(int i = 0;i<(nums.size()-1);i++){
  //          for(int j =i+1;j<nums.size();j++){
@@ -30,9 +49,9 @@ class Solution
         
  //         }
  //      } 
-        sort(rind.begin(), rind.end());
-       return rind;
-    }
+
+ //      return rind;
+ //   }
 
     void print(vector <int> const &a) {
     cout << "The vector elements are : ";
