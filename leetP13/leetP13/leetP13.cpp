@@ -14,19 +14,26 @@ public:
         unordered_map<char, short int> umap = { {'I',1}, {'V',5},
     {'X',10},{'L',50},{'C',100},{'D',500},{'M',1000} };
         int sum = 0;
-        int nexts = 0;
-        for (size_t i = 0, ilen = s.size()-1; i < ilen; i++) {
-            int currents = umap[s[i]];
-            nexts = umap[s[i + 1]];
-            if (currents >= nexts) {
-                sum += currents;
+        int nexts = umap[s[0]];
+        if (s.size() > 1) {
+            for (size_t i = 0, ilen = s.size() - 1; i < ilen; i++) {
+                int currents = umap[s[i]];
+                nexts = umap[s[i + 1]];
+                if (currents >= nexts) {
+                    sum += currents;
 
+                }
+                else {
+                    sum -= currents;
+                }
             }
-            else {
-                sum -= currents;
-            }
+            sum += nexts;
         }
-        sum += nexts;
+        else {
+            sum += nexts;
+        }
+
+
         return sum;
 
     }
